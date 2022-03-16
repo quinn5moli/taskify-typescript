@@ -2,6 +2,7 @@ import React from 'react'
 import { ToDo } from '../model'
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai'
 import { MdDone } from 'react-icons/md'
+import './styles.css'
 
 type Props = {
     toDo: ToDo,
