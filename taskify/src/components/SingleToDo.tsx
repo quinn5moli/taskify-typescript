@@ -1,5 +1,6 @@
 import React from 'react'
 import { ToDo } from '../model'
+import { AiFillEdit } from 'react-icons/ai'
 
 type Props = {
     toDo: ToDo,
@@ -10,9 +11,17 @@ type Props = {
 
 const SingleToDo = ({toDo, ToDos, setToDos}: Props) => {
   return (
-    <div>
+    <form className="todos-single">
+        <span className="todos-single-text">{toDo.toDo}</span>
 
-    </div>
+        <div>
+            <span className="icon">
+                <AiFillEdit />
+            </span>
+            <span className="icon"></span>
+            <span className="icon"></span>
+        </div>
+    </form>
   )
 }
 
