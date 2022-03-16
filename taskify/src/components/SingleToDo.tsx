@@ -12,9 +12,22 @@ type Props = {
 }
 
 const SingleToDo = ({toDo, ToDos, setToDos}: Props) => {
+  const handleDone = (id: number) => {
+      setToDos(
+        ToDos.map((toDo)=> 
+          toDo.id === id?{...toDo, isDone:!toDo.isDone} : toDo
+        )
+      )
+  }
   return (
     <form className="todos-single">
-        <span className="todos-single-text">{toDo.toDo}</span>
+        {
+            toDo.isDone ? (
+              <s className="todos-single-text">{toDo.toDo}</s>
+            ) : (
+              <span className="todos-single-text">{toDo.toDo}</span>
+            )
+        }
 
         <div>
             <span className="icon">
@@ -23,7 +36,7 @@ const SingleToDo = ({toDo, ToDos, setToDos}: Props) => {
             <span className="icon">
                 <AiFillDelete />
             </span>
-            <span className="icon">
+            <span className="icon" onClick={() =>handleDone(toDo.id)}>
                 <MdDone />
             </span>
         </div>
