@@ -1,4 +1,5 @@
 import React from 'react'
+import { Droppable } from 'react-beautiful-dnd';
 import { ToDo } from '../model';
 import SingleToDo from './SingleToDo';
 import './styles.css'
@@ -10,35 +11,60 @@ interface Props{
     setCompletedToDos:React.Dispatch<React.SetStateAction<ToDo[]>>;
 }
 
-const ToDoList: React.FC<Props> = ({ToDos, setToDos}: Props) => {
+const ToDoList: React.FC<Props> = ({
+    ToDos, 
+    setToDos, 
+    completedToDos, 
+    setCompletedToDos}
+) => {
   return (
     <div className="container">
-        <div className="todos">
-            <span className="todos-heading">
-                Active Tasks
-            </span>
-            {ToDos.map((toDo) => (
+        <Droppable droppableId="ToDosRemove">
+            {(provided) => (
+              <div 
+                className="todos" 
+                ref={provided.innerRef} 
+                {...provided.droppableProps}
+            >
+                <span className="todos-heading">
+                    Active Tasks
+                </span>
+                {ToDos.map((toDo, index) => (
                     <SingleToDo 
-                      toDo={toDo} 
-                      ToDos={ToDos} 
-                      key={toDo.id} 
-                      setToDos={setToDos} 
+                        index={index}
+                        toDo={toDo} 
+                        ToDos={ToDos} 
+                        key={toDo.id} 
+                        setToDos={setToDos} 
                     />
                 ))}
-        </div>
-        <div className="todos remove">
-        <span className="todos-heading">
-                Completed Tasks
-        </span>
-            {ToDos.map((toDo) => (
+              </div>
+            )}
+            
+        </Droppable>
+        
+        <Droppable droppableId="ToDosList">
+            {(provided) => (
+            <div 
+              className="todos remove"
+              ref={provided.innerRef} 
+              {...provided.droppableProps}
+            >
+                <span className="todos-heading">
+                        Completed Tasks
+                </span>
+                {completedToDos.map((toDo, index) => (
                     <SingleToDo 
-                      toDo={toDo} 
-                      ToDos={ToDos} 
-                      key={toDo.id} 
-                      setToDos={setToDos} 
+                        index={index}
+                        toDo={toDo} 
+                        ToDos={completedToDos} 
+                        key={toDo.id} 
+                        setToDos={setCompletedToDos} 
                     />
                 ))}
-        </div>
+            </div>
+            )}
+        </Droppable>
     </div>
   )
 }

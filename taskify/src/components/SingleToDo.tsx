@@ -5,13 +5,14 @@ import { MdDone } from 'react-icons/md'
 import './styles.css'
 
 type Props = {
+    index: number;
     toDo: ToDo,
     ToDos:ToDo[],
     setToDos: React.Dispatch<React.SetStateAction<ToDo[]>>
 
 }
 
-const SingleToDo = ({toDo, ToDos, setToDos}: Props) => {
+const SingleToDo = ({index, toDo, ToDos, setToDos}: Props) => {
     const [edit, setEdit] = useState<boolean>(false);
     const [editToDo, setEditToDo] = useState<string>(toDo.toDo)
 
