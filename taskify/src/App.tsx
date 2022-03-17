@@ -3,7 +3,7 @@ import './App.css';
 import InputField from './components/InputField';
 import ToDoList from './components/ToDoList';
 import { ToDo } from './model';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
 const App: React.FC = () => {
 
@@ -20,8 +20,12 @@ const App: React.FC = () => {
     }
   };
 
+  const onDragEnd = (result:DropResult) => {
+
+  }
+
   return (
-    <DragDropContext onDragEnd={() => {}}>
+    <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
         <span className="heading">Taskify</span>
         <InputField toDo={toDo} setToDo={setToDo} handleAdd={handleAdd} />
